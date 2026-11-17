@@ -9,6 +9,9 @@
 3. [固定版本的源码引述](docs/03_code_references.md)（[机器可读 manifest](references/code_sources.json)）：Wan、Uni-ViGU、MDLM 的 commit SHA、文件及行号；论文/实现差异、许可与待核问题。
 4. [最小证据树和实验判别](docs/04_experiment_logic.md)：先证明「读得到」「写得动」，再证明「原文重建提供增益」；保留视频供人工判断。
 5. [文献与创新性边界](docs/05_literature_boundary.md)：区分已公开的联合去噪、原文重建和本文拟验证的视频侧收益。
+6. [算子驱动的实验方案](docs/06_operator_experiments.md)：训练前用条件速度差分测可控性，再测文字重建的视觉依赖，最终用匹配消融验证视频侧收益。
+
+**实验准备**：[分阶段机器可读计划](experiments/plan_operator_v0.json) · [8 对动作反事实 prompt（尚未配视频）](experiments/prompt_sets/operator_pairs_v0.json) · [CPU 算子测试](tests/test_operator_invariants.py)（运行要求：PyTorch）。
 
 ## 中心问题
 
