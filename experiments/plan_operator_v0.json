@@ -1,0 +1,148 @@
+{
+  "schema": "tv2tv_operator_experiment_contract_v0",
+  "status": "DESIGN_ONLY",
+  "base_model": "Wan2.1 T2V-1.3B",
+  "base_code_sha": "9737cba9c1c3c4d04b33fcad41c111989865d315",
+  "protocol": {
+    "pilot": {
+      "width": 832,
+      "height": 480,
+      "pixel_frames": 49,
+      "steps": 50,
+      "solver": "unipc",
+      "shift": 5,
+      "cfg": 5,
+      "seeds_per_prompt": 1,
+      "video_source": "prompt_only_until_generated"
+    },
+    "confirmation": {
+      "pixel_frames": 81,
+      "seed_policy": "paired_multi_seed",
+      "sample_size_policy": "freeze_after_pilot_variance_and_compute_check"
+    },
+    "assets_required": [
+      "prompt pair",
+      "seed",
+      "initial latent",
+      "scheduler state at fork",
+      "base model hash",
+      "text model hash if used",
+      "run id",
+      "generated MP4",
+      "human rating",
+      "runtime"
+    ]
+  },
+  "stages": [
+    {
+      "id": "E0",
+      "name": "operator invariants and Wan-hook smoke",
+      "requires": [],
+      "research_question": "Is the event/time routing operator mathematically correct and gradient-reachable?",
+      "minimum_evidence": "CPU toy tests plus actual Wan hooked forward identity and nonzero-adapter gradient check",
+      "status": "UNVERIFIED",
+      "next": "E1"
+    },
+    {
+      "id": "E1",
+      "name": "training-free counterfactual semantic control",
+      "requires": [
+        "E0"
+      ],
+      "research_question": "Can conditional velocity differences change the specified event at a chosen latent time?",
+      "arms": [
+        "baseline",
+        "global_equal_norm",
+        "time_routed",
+        "time_permuted"
+      ],
+      "data": "4 prompt pairs x 1 video seed exploratory",
+      "primary_evidence": "complete paired MP4 human video judgement; solver replay exact",
+      "status": "UNVERIFIED",
+      "next": "E2"
+    },
+    {
+      "id": "E2",
+      "name": "visual evidence in original-prompt reconstruction",
+      "requires": [
+        "E0"
+      ],
+      "research_question": "Does masked original text recovery depend on the performed motion rather than the prompt prior?",
+      "arms": [
+        "text_only",
+        "correct_visual",
+        "wrong_visual",
+        "temporal_shuffle",
+        "leaked_context_bad_control"
+      ],
+      "data": "SSv2 research-licensed labeled short clips, source-separated train/validation; independently evaluate generated trajectories",
+      "metric": "paired correct-vs-counterfactual masked token log-odds, t x s noise map",
+      "status": "UNVERIFIED",
+      "next": "E2_5"
+    },
+    {
+      "id": "E2_5",
+      "name": "reconstruction semantic guidance",
+      "requires": [
+        "E1",
+        "E2"
+      ],
+      "research_question": "Is the reconstruction energy gradient directed toward the desired video event?",
+      "arms": [
+        "baseline",
+        "target_text_guidance",
+        "counterfactual_guidance",
+        "norm_matched_random"
+      ],
+      "metric": "final MP4 event behavior and local residual alignment, not text accuracy alone",
+      "status": "UNVERIFIED",
+      "next": "E3"
+    },
+    {
+      "id": "E3",
+      "name": "posttraining coupling and text loss ablation",
+      "requires": [
+        "E1",
+        "E2"
+      ],
+      "research_question": "Does original-text reconstruction improve video beyond identical temporal adapter and its compute?",
+      "arms": [
+        "B0_Wan",
+        "A_adapter_only",
+        "B_text_only_reconstruction",
+        "C_joint_reconstruction",
+        "D_static_from_C",
+        "E_joint_no_text_loss_retrained"
+      ],
+      "first_train": [
+        "C_joint_reconstruction",
+        "E_joint_no_text_loss_retrained"
+      ],
+      "primary_metric": "paired event completion and event order human-verified",
+      "secondary_metrics": [
+        "role_binding",
+        "contact",
+        "visual_quality",
+        "GPU_hours",
+        "VRAM",
+        "video_wallclock",
+        "denoiser_forwards"
+      ],
+      "status": "UNVERIFIED"
+    }
+  ],
+  "implementation_limits": [
+    "Do not launch full joint pretrained video model or copy Uni-ViGU architecture before E1/E2 evidence",
+    "Do not treat latent-frame masks as pixel-frame boundaries",
+    "Do not treat a teacher-forced video probe as generated-trajectory evidence",
+    "Do not interpret decoded text accuracy as video improvement",
+    "Freeze evaluation before confirmatory runs; keep human-viewable paired MP4s",
+    "Discrete token resampling is not differentiable: use causal intervention or an explicit estimator instead of naive autograd through sampling"
+  ],
+  "authoritative_docs": [
+    "docs/06_operator_experiments.md",
+    "docs/02_operator_and_alignment.md",
+    "docs/03_code_references.md",
+    "docs/04_experiment_logic.md"
+  ]
+}
