@@ -1,0 +1,209 @@
+{
+  "schema": "t_v2tv_code_references_v1",
+  "snapshot_date": "2026-11-18",
+  "verification": "STATIC_ONLY: GitHub file content inspected; no execution",
+  "upstreams": [
+    {
+      "key": "wan",
+      "repo": "Wan-Video/Wan2.1",
+      "sha": "9737cba9c1c3c4d04b33fcad41c111989865d315",
+      "license": "Apache-2.0 (repository LICENSE.txt)"
+    },
+    {
+      "key": "uni_vigu",
+      "repo": "Fr0zenCrane/Uni-ViGU",
+      "sha": "b73244f3a71143a3960ba9814f3686f50a778620",
+      "license": "Repository LICENSE: Apache-2.0; individual file headers may differ"
+    },
+    {
+      "key": "mdlm",
+      "repo": "kuleshov-group/mdlm",
+      "sha": "c112c526d193436838c98d81455ee51f90309470",
+      "license": "Apache-2.0 (repository LICENSE)"
+    }
+  ],
+  "bindings": [
+    {
+      "id": "wan_model_config",
+      "upstream": "wan",
+      "path": "wan/configs/wan_t2v_1_3B.py",
+      "line_range": [
+        19,
+        28
+      ],
+      "operator_claim": "model_config",
+      "url": "https://github.com/Wan-Video/Wan2.1/blob/9737cba9c1c3c4d04b33fcad41c111989865d315/wan/configs/wan_t2v_1_3B.py#L19-L28"
+    },
+    {
+      "id": "wan_text_preencoding",
+      "upstream": "wan",
+      "path": "wan/text2video.py",
+      "line_range": [
+        173,
+        184
+      ],
+      "operator_claim": "text_preencoding",
+      "url": "https://github.com/Wan-Video/Wan2.1/blob/9737cba9c1c3c4d04b33fcad41c111989865d315/wan/text2video.py#L173-L184"
+    },
+    {
+      "id": "wan_inference_cfg_loop",
+      "upstream": "wan",
+      "path": "wan/text2video.py",
+      "line_range": [
+        202,
+        254
+      ],
+      "operator_claim": "inference_cfg_loop",
+      "url": "https://github.com/Wan-Video/Wan2.1/blob/9737cba9c1c3c4d04b33fcad41c111989865d315/wan/text2video.py#L202-L254"
+    },
+    {
+      "id": "wan_video_q_text_kv",
+      "upstream": "wan",
+      "path": "wan/modules/model.py",
+      "line_range": [
+        162,
+        181
+      ],
+      "operator_claim": "video_q_text_kv",
+      "url": "https://github.com/Wan-Video/Wan2.1/blob/9737cba9c1c3c4d04b33fcad41c111989865d315/wan/modules/model.py#L162-L181"
+    },
+    {
+      "id": "wan_block_operator_order",
+      "upstream": "wan",
+      "path": "wan/modules/model.py",
+      "line_range": [
+        278,
+        317
+      ],
+      "operator_claim": "block_operator_order",
+      "url": "https://github.com/Wan-Video/Wan2.1/blob/9737cba9c1c3c4d04b33fcad41c111989865d315/wan/modules/model.py#L278-L317"
+    },
+    {
+      "id": "wan_text_context_projection",
+      "upstream": "wan",
+      "path": "wan/modules/model.py",
+      "line_range": [
+        552,
+        574
+      ],
+      "operator_claim": "text_context_projection",
+      "url": "https://github.com/Wan-Video/Wan2.1/blob/9737cba9c1c3c4d04b33fcad41c111989865d315/wan/modules/model.py#L552-L574"
+    },
+    {
+      "id": "uni_vigu_joint_model_contract",
+      "upstream": "uni_vigu",
+      "path": "model/transformer.py",
+      "line_range": [
+        398,
+        516
+      ],
+      "operator_claim": "joint_model_contract",
+      "url": "https://github.com/Fr0zenCrane/Uni-ViGU/blob/b73244f3a71143a3960ba9814f3686f50a778620/model/transformer.py#L398-L516"
+    },
+    {
+      "id": "uni_vigu_joint_self_attention",
+      "upstream": "uni_vigu",
+      "path": "diffusers/models/transformers/transformer_wan.py",
+      "line_range": [
+        127,
+        182
+      ],
+      "operator_claim": "joint_self_attention",
+      "url": "https://github.com/Fr0zenCrane/Uni-ViGU/blob/b73244f3a71143a3960ba9814f3686f50a778620/diffusers/models/transformers/transformer_wan.py#L127-L182"
+    },
+    {
+      "id": "uni_vigu_copied_text_ffn",
+      "upstream": "uni_vigu",
+      "path": "diffusers/models/transformers/transformer_wan.py",
+      "line_range": [
+        595,
+        612
+      ],
+      "operator_claim": "copied_text_ffn",
+      "url": "https://github.com/Fr0zenCrane/Uni-ViGU/blob/b73244f3a71143a3960ba9814f3686f50a778620/diffusers/models/transformers/transformer_wan.py#L595-L612"
+    },
+    {
+      "id": "uni_vigu_joint_block_operator_order",
+      "upstream": "uni_vigu",
+      "path": "diffusers/models/transformers/transformer_wan.py",
+      "line_range": [
+        660,
+        697
+      ],
+      "operator_claim": "joint_block_operator_order",
+      "url": "https://github.com/Fr0zenCrane/Uni-ViGU/blob/b73244f3a71143a3960ba9814f3686f50a778620/diffusers/models/transformers/transformer_wan.py#L660-L697"
+    },
+    {
+      "id": "uni_vigu_fixed_vs_dynamic_text",
+      "upstream": "uni_vigu",
+      "path": "inference_unified_wan.py",
+      "line_range": [
+        746,
+        788
+      ],
+      "operator_claim": "fixed_vs_dynamic_text",
+      "url": "https://github.com/Fr0zenCrane/Uni-ViGU/blob/b73244f3a71143a3960ba9814f3686f50a778620/inference_unified_wan.py#L746-L788"
+    },
+    {
+      "id": "uni_vigu_logits_and_discrete_text_update",
+      "upstream": "uni_vigu",
+      "path": "inference_unified_wan.py",
+      "line_range": [
+        790,
+        845
+      ],
+      "operator_claim": "logits_and_discrete_text_update",
+      "url": "https://github.com/Fr0zenCrane/Uni-ViGU/blob/b73244f3a71143a3960ba9814f3686f50a778620/inference_unified_wan.py#L790-L845"
+    },
+    {
+      "id": "mdlm_subs_parameterization",
+      "upstream": "mdlm",
+      "path": "diffusion.py",
+      "line_range": [
+        259,
+        277
+      ],
+      "operator_claim": "subs_parameterization",
+      "url": "https://github.com/kuleshov-group/mdlm/blob/c112c526d193436838c98d81455ee51f90309470/diffusion.py#L259-L277"
+    },
+    {
+      "id": "mdlm_forward_mask_corruption",
+      "upstream": "mdlm",
+      "path": "diffusion.py",
+      "line_range": [
+        575,
+        590
+      ],
+      "operator_claim": "forward_mask_corruption",
+      "url": "https://github.com/kuleshov-group/mdlm/blob/c112c526d193436838c98d81455ee51f90309470/diffusion.py#L575-L590"
+    },
+    {
+      "id": "mdlm_masked_reverse_transition",
+      "upstream": "mdlm",
+      "path": "diffusion.py",
+      "line_range": [
+        611,
+        639
+      ],
+      "operator_claim": "masked_reverse_transition",
+      "url": "https://github.com/kuleshov-group/mdlm/blob/c112c526d193436838c98d81455ee51f90309470/diffusion.py#L611-L639"
+    },
+    {
+      "id": "mdlm_sampler_entry",
+      "upstream": "mdlm",
+      "path": "diffusion.py",
+      "line_range": [
+        658,
+        705
+      ],
+      "operator_claim": "sampler_entry",
+      "url": "https://github.com/kuleshov-group/mdlm/blob/c112c526d193436838c98d81455ee51f90309470/diffusion.py#L658-L705"
+    }
+  ],
+  "open_bindings": [
+    "Uni-ViGU Stage 1 training loop/loss/condition dropout absent in referenced public snapshot",
+    "Text model checkpoint/tokenizer and language coverage not selected",
+    "Wan sampler time-to-text denoiser time conversion not implemented"
+  ],
+  "usage": "Links-only citation manifest. Do not treat linked code as copied or validated for training in this repository."
+}
