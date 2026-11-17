@@ -6,7 +6,7 @@
 
 1. [研究问题与数学边界](docs/01_problem_definition.md)：究竟要证明什么，为什么文字重建正确不等于视频改善；区分视频帧时间、视频噪声进度、文字噪声进度。
 2. [文字去噪与时序对齐的算子方案](docs/02_operator_and_alignment.md)：连续 embedding flow、离散 masked diffusion、轻量状态重建的取舍，视觉读取—文本恢复—时序写入的张量接口。
-3. [固定版本的源码引述](docs/03_code_references.md)：Wan、Uni-ViGU、MDLM 的 commit SHA、文件及行号；论文/实现差异、许可与待核问题。
+3. [固定版本的源码引述](docs/03_code_references.md)（[机器可读 manifest](references/code_sources.json)）：Wan、Uni-ViGU、MDLM 的 commit SHA、文件及行号；论文/实现差异、许可与待核问题。
 4. [最小证据树和实验判别](docs/04_experiment_logic.md)：先证明「读得到」「写得动」，再证明「原文重建提供增益」；保留视频供人工判断。
 5. [文献与创新性边界](docs/05_literature_boundary.md)：区分已公开的联合去噪、原文重建和本文拟验证的视频侧收益。
 
