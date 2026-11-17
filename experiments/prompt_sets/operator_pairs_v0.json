@@ -1,0 +1,142 @@
+{
+  "schema": "tv2tv_operator_pairs_v0",
+  "status": "prompt_only_no_verified_video",
+  "language": "en",
+  "notes": [
+    "Contrasts are hand-designed candidates, not observed successful videos; do not label generated clips correct without viewing.",
+    "Use the identical visible masked prompt for each pair. Mask all differing subword tokens under the selected text tokenizer.",
+    "Real matched videos for the reading probe must be separately acquired, verified and source-separated.",
+    "Templates prioritize visual event contrasts with similar objects and backgrounds; temporal reversal videos can be out of distribution."
+  ],
+  "pairs": [
+    {
+      "pair_id": "P01",
+      "category": "motion_direction_order",
+      "prompt_a": "A red ball rolls left across a table, then rolls right.",
+      "prompt_b": "A red ball rolls right across a table, then rolls left.",
+      "contrast": "left_then_right_vs_right_then_left",
+      "mask_semantic_units": [
+        "first motion direction",
+        "second motion direction"
+      ],
+      "observables": [
+        "initial direction",
+        "reversal direction",
+        "order"
+      ],
+      "asset_status": "none"
+    },
+    {
+      "pair_id": "P02",
+      "category": "actor_motion_order",
+      "prompt_a": "A person raises the left hand, then raises the right hand.",
+      "prompt_b": "A person raises the right hand, then raises the left hand.",
+      "contrast": "hand_raise_order",
+      "mask_semantic_units": [
+        "first hand",
+        "second hand"
+      ],
+      "observables": [
+        "first moving hand",
+        "second moving hand",
+        "hand continuity"
+      ],
+      "asset_status": "none"
+    },
+    {
+      "pair_id": "P03",
+      "category": "event_order",
+      "prompt_a": "A person claps twice, then waves with one hand.",
+      "prompt_b": "A person waves with one hand, then claps twice.",
+      "contrast": "clap_and_wave_order",
+      "mask_semantic_units": [
+        "first action clause",
+        "second action clause"
+      ],
+      "observables": [
+        "event occurrence",
+        "event order"
+      ],
+      "asset_status": "none"
+    },
+    {
+      "pair_id": "P04",
+      "category": "event_order",
+      "prompt_a": "A dancer turns to face left, then turns to face right.",
+      "prompt_b": "A dancer turns to face right, then turns to face left.",
+      "contrast": "turn_direction_order",
+      "mask_semantic_units": [
+        "first facing direction",
+        "second facing direction"
+      ],
+      "observables": [
+        "turn direction",
+        "order",
+        "identity continuity"
+      ],
+      "asset_status": "none"
+    },
+    {
+      "pair_id": "P05",
+      "category": "actor_binding",
+      "prompt_a": "A person lifts a blue mug using the left hand.",
+      "prompt_b": "A person lifts a blue mug using the right hand.",
+      "contrast": "left_vs_right_hand_object",
+      "mask_semantic_units": [
+        "acting hand"
+      ],
+      "observables": [
+        "grasping hand",
+        "mug movement",
+        "hand-object contact"
+      ],
+      "asset_status": "none"
+    },
+    {
+      "pair_id": "P06",
+      "category": "actor_binding",
+      "prompt_a": "The person in red lifts a yellow box, while the person in blue holds a green book.",
+      "prompt_b": "The person in blue lifts a yellow box, while the person in red holds a green book.",
+      "contrast": "agent_action_assignment",
+      "mask_semantic_units": [
+        "lifter clothing color",
+        "book holder clothing color"
+      ],
+      "observables": [
+        "which actor lifts box",
+        "which actor holds book"
+      ],
+      "asset_status": "none"
+    },
+    {
+      "pair_id": "P07",
+      "category": "spatial_relation",
+      "prompt_a": "A small ball rolls in front of a stationary blue cube.",
+      "prompt_b": "A small ball rolls behind a stationary blue cube.",
+      "contrast": "front_vs_behind",
+      "mask_semantic_units": [
+        "relative occlusion direction"
+      ],
+      "observables": [
+        "ball visibility",
+        "occlusion ordering"
+      ],
+      "asset_status": "none"
+    },
+    {
+      "pair_id": "P08",
+      "category": "spatial_relation",
+      "prompt_a": "A person slides the red block to the left of a green block.",
+      "prompt_b": "A person slides the red block to the right of a green block.",
+      "contrast": "left_vs_right_destination",
+      "mask_semantic_units": [
+        "relative destination"
+      ],
+      "observables": [
+        "initial motion direction",
+        "final relative location"
+      ],
+      "asset_status": "none"
+    }
+  ]
+}
