@@ -2,13 +2,15 @@
 
 **阅读日期：2026-11-19；状态：论文与公开代码的研究性核对，STATIC_ONLY。** 目标仍是 **Wan2.1 T2V-1.3B 的视频生成提升**，允许有限后训练，不进行视频骨干预训练。此文扩展 [05 文献边界](05_literature_boundary.md)。不应预设「文字同时去噪」是最有效接口。
 
+按完整计算图重新归类并补入 GRAN-TED、Semantic Routing 的综合整理，见 [09 文本条件的计算图与文献分类](09_text_condition_computational_graph.md)。
+
 ## 1. 用功能而非模型名称组织文献
 
 | 来源 | 语义中间对象 / 发生在哪个阶段 | 已有的作用证据 | 对 T-V2TV 的实际启发 | 机制重合 |
 |---|---|---|---|---|
-| [Kling, Behind Video Generation, 2026-11](https://arxiv.org/abs/2611.04916) | dense caption -> 多层 text encoder 的逐 token hidden states -> DiT；并研究 caption、prompt enhancement、感知训练、条件稳定性 | 报告 `6 的内部人类对照：相对 Qwen TE 基线，多模态适配/多粒度/稳定融合，指令遵循比例依次 1.04 / 1.11 / 1.14；基座与训练步匹配；不等于冻结 Wan 的收益 | **语义传输精度**可能是瓶颈。应先检查逐 token 的动作/关系信息是否仍能通过文字编码及 DiT 注意力作用到视频；避免只用 pooled 向量替代条件 | shared target |
+| [Kling, Behind Video Generation, 2026-11](https://arxiv.org/abs/2611.04916) | dense caption -> 多层 text encoder 的逐 token hidden states -> DiT；并研究 caption、prompt enhancement、感知训练、条件稳定性 | 报告第 6 节的内部人类对照：相对 Qwen TE 基线，多模态适配/多粒度/稳定融合，指令遵循比例依次 1.04 / 1.11 / 1.14；基座与训练步匹配；不等于冻结 Wan 的收益 | **语义传输精度**可能是瓶颈。应先检查逐 token 的动作/关系信息是否仍能通过文字编码及 DiT 注意力作用到视频；避免只用 pooled 向量替代条件 | shared target |
 | [FLUX.3 Image Klein / Diffusers 分析, 2026-10](https://huggingface.co/blog/flux-3) | Qwen3-VL 的 36 层取第 4,8,...,32 层；每 token 拼接 8×2560 -> 投影到 3072；每次去噪文字 token 均用 clean timestep 0；文本与图像先各自 5 block，再联合 28 block | 公布图像生成结构与代码，非视频任务；不是文字本身扩散 | **静态多层逐 token 语义仍可强有力**。动态文字分支必须与多层静态 TE 强对照，而非只与原生 T5 比 | distinct mechanism / strong static baseline |
-| [Bernini, 2026](https://arxiv.org/abs/2605.22344) | MLLM 将目标视觉的连续 ViT embedding 作为 masked tokens 逐轮补全；MLP connector 将目标语义隐状态写入 DiT（另保留 T5 条件） | 完整视频生成/编辑及 ablation；公开 [代码](https://github.com/bytedance/Bernini)；有基于 Wan2.1-1.3B 的 **renderer-only** 检查点 | **复原的对象可以是视觉语义而不是原文字**。有真实视频语义 teacher。先 planner 后 renderer：此处不是每个 DiT 步都再进行语义补全 | direct competitor for semantic-latent planning; not dynamic text reconstruction |
+| [Bernini, 2026](https://arxiv.org/abs/2605.22344) | MLLM 将目标视觉的连续 ViT embedding 作为 masked tokens 逐轮补全；MLP connector 将目标语义隐状态写入 DiT（另保留 T5 条件） | 编辑/参考生成与 ablation；T2V VBench 84.64 对底座 84.79，说明保留能力；公开 [代码](https://github.com/bytedance/Bernini)；1.3B 检查点是 **renderer-only** | **复原的对象可以是视觉语义而不是原文字**。有真实视频语义 teacher。先 planner 后 renderer：此处不是每个 DiT 步都再进行语义补全 | direct competitor for semantic-latent planning; not dynamic text reconstruction |
 | [X-Omni, 2025](https://arxiv.org/abs/2507.22058) | SigLIP2 视觉语义 -> VQ 图像 token -> LLM 自回归生成语义 token -> FLUX.1-dev diffusion decoder 输出像素，RL 让生成 token 适应解码器 | **图像**生成与语义图像词表的实证，不是 T2V；解码器与语义先验对齐是关键 | **“LLM 生成 coarse image”** 是先生成语义可读的视觉代理，再让视觉模型补细节；可用连续目标视觉 embedding 替代重做 VQ 词表 | shared semantic prior; different generation process |
 | [TokenFlow, CVPR 2025](https://openaccess.thecvf.com/content/CVPR2025/html/Qu_TokenFlow_Unified_Image_Tokenizer_for_Multimodal_Understanding_and_Generation_CVPR_2025_paper.html) | 语义/像素双 codebook，通过共享 indices 关联高层语义与低层细节 | 验证了图像理解与重建需要不同粒度的 tokenizer | 如果离散视觉 token 表达过粗，可把语义—外观两条路径分开；本项目不需先训练新视觉词表 | relevant representation prior |
 | [SemHiTok, ICLR 2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/49ffa271264808cf500ea528ed8ec9b3-Abstract-Conference.html) | 在语义 codebook 上建立细节层级 codebook | 图像理解/生成研究中的语义与细节解耦 | 需要匹配视频训练预算，**先用已有冻结 ViT 表示**，后续再考虑离散码本 | relevant representation prior |
