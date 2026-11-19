@@ -2,6 +2,8 @@
 
 状态：**EXPERIMENT DESIGN / STATIC_ONLY**。目标模型是 Wan2.1 T2V-1.3B；只考虑参数高效后训练。此文细化 [04](04_experiment_logic.md)，并将研究目标拆成三个独立的可测机制：视觉读取 R、视频控制 W、联合重建的额外收益 G。没有已完成的视频运行或训练结果。
 
+> **2026-11-19 文献驱动的前置步骤：**先阅读 [07 语义接口与文献](07_semantic_interfaces_and_literature.md) 和 [08 语义传输前置实验](08_condition_interface_experiments.md)。新增 E−1 审计原生 umT5 的逐 token 语义可辨识度及 Wan 的条件消费通路；再决定是否优先进行本文的原文恢复、时序写入或视觉语义计划。不把文字扩散预设为唯一方法。
+
 ## 1. 科学对象与复合雅可比
 
 原文 `c` 始终提供给原生 Wan：`v_0(x_t,t,c)`。另将 `c` 腐化成 `z_s`，通过当前视频状态获得恢复中间表示：
