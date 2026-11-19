@@ -12,6 +12,7 @@
 6. [算子驱动的实验方案](docs/06_operator_experiments.md)：训练前用条件速度差分测可控性，再测文字重建的视觉依赖，最终用匹配消融验证视频侧收益。
 7. [条件语义接口与近邻文献](docs/07_semantic_interfaces_and_literature.md)：Kling、FLUX.3、Bernini、X-Omni、MoT、Transfusion、TokenFlow 与视觉语义词表的机制比较。
 8. [新的语义传输前置实验](docs/08_condition_interface_experiments.md)：在文字扩散训练前区分编码信息损失、视频条件消费不足、视觉语义先验与真正动态反馈。
+9. [文本条件的计算图与文献分类](docs/09_text_condition_computational_graph.md)：按输入、编码、语义规划、时空路由、训练目标和联合演化整理文献，追踪偏差来源与最终视频响应；补入 GRAN-TED 和 Semantic Routing。
 
 [新增文献与固定源码清单](references/semantic_interface_sources.json)。
 
