@@ -10,6 +10,10 @@
 4. [最小证据树和实验判别](docs/04_experiment_logic.md)：先证明「读得到」「写得动」，再证明「原文重建提供增益」；保留视频供人工判断。
 5. [文献与创新性边界](docs/05_literature_boundary.md)：区分已公开的联合去噪、原文重建和本文拟验证的视频侧收益。
 6. [算子驱动的实验方案](docs/06_operator_experiments.md)：训练前用条件速度差分测可控性，再测文字重建的视觉依赖，最终用匹配消融验证视频侧收益。
+7. [条件语义接口与近邻文献](docs/07_semantic_interfaces_and_literature.md)：Kling、FLUX.3、Bernini、X-Omni、MoT、Transfusion、TokenFlow 与视觉语义词表的机制比较。
+8. [新的语义传输前置实验](docs/08_condition_interface_experiments.md)：在文字扩散训练前区分编码信息损失、视频条件消费不足、视觉语义先验与真正动态反馈。
+
+[新增文献与固定源码清单](references/semantic_interface_sources.json)。
 
 **实验准备**：[分阶段机器可读计划](experiments/plan_operator_v0.json) · [8 对动作反事实 prompt（尚未配视频）](experiments/prompt_sets/operator_pairs_v0.json) · [CPU 算子测试](tests/test_operator_invariants.py)（运行要求：PyTorch）。
 
