@@ -1,0 +1,148 @@
+{
+  "schema": "tv2tv_semantic_interface_sources_v1",
+  "review_date": "2026-11-19",
+  "status": "SOURCES_CHECKED_METHOD_NOT_REPRODUCED",
+  "sources": [
+    {
+      "id": "kling_semantic_contract",
+      "title": "Behind Video Generation: Observations and Insights on Multimodal Understanding from Kling",
+      "url": "https://arxiv.org/abs/2611.04916",
+      "date": "2026-11-03",
+      "type": "technical_report",
+      "evidence": "Kling report Sec.3/6: dense captions; multi-layer text token representations; controlled internal human TE comparison",
+      "caution": "No publicly verified reproduction on Wan; internal evaluation settings"
+    },
+    {
+      "id": "flux3",
+      "title": "Welcome FLUX.3 Image Klein in Diffusers",
+      "url": "https://huggingface.co/blog/flux-3",
+      "date": "2026-10-15",
+      "type": "technical_blog",
+      "evidence": "Qwen3-VL layers 4,8,...32; token-wise concat; 5 modality-specific + 28 joint blocks; text clean at each denoising call",
+      "caution": "Image, not video. Cross-layer hidden not a denoising text state."
+    },
+    {
+      "id": "bernini",
+      "title": "Bernini: Latent Semantic Planning for Video Diffusion",
+      "url": "https://arxiv.org/abs/2605.22344",
+      "date": "2026-05-21",
+      "type": "paper_and_code",
+      "repo": "bytedance/Bernini",
+      "commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
+      "code": [
+        {
+          "path": "bernini/models/bernini.py",
+          "start": 51,
+          "end": 99,
+          "claim": "MLP connectors to generator and ViT embedding",
+          "url": "https://github.com/bytedance/Bernini/blob/e6c2cf11843470b08491745947abcba9c3c6b079/bernini/models/bernini.py#L51-L99"
+        },
+        {
+          "path": "bernini/models/bernini.py",
+          "start": 437,
+          "end": 520,
+          "claim": "Masked target-ViT semantic tokens and conditioning interface",
+          "url": "https://github.com/bytedance/Bernini/blob/e6c2cf11843470b08491745947abcba9c3c6b079/bernini/models/bernini.py#L437-L520"
+        },
+        {
+          "path": "docs/bernini.md",
+          "start": 1,
+          "end": 17,
+          "claim": "Full Bernini planner renderer model family",
+          "url": "https://github.com/bytedance/Bernini/blob/e6c2cf11843470b08491745947abcba9c3c6b079/docs/bernini.md#L1-L17"
+        },
+        {
+          "path": "docs/bernini_r.md",
+          "start": 1,
+          "end": 19,
+          "claim": "Renderer-only Wan2.1 1.3B release",
+          "url": "https://github.com/bytedance/Bernini/blob/e6c2cf11843470b08491745947abcba9c3c6b079/docs/bernini_r.md#L1-L19"
+        },
+        {
+          "path": "docs/bernini_r_train.md",
+          "start": 45,
+          "end": 56,
+          "claim": "Preextract target ViT/VAE features for training",
+          "url": "https://github.com/bytedance/Bernini/blob/e6c2cf11843470b08491745947abcba9c3c6b079/docs/bernini_r_train.md#L45-L56"
+        }
+      ],
+      "caution": "Full public planner uses Wan2.2 A14B; 1.3B is renderer only"
+    },
+    {
+      "id": "x_omni",
+      "title": "X-Omni: Reinforcement Learning Makes Discrete Autoregressive Image Generative Models Great Again",
+      "url": "https://arxiv.org/abs/2507.22058",
+      "date": "2025-07-29",
+      "type": "paper_and_code",
+      "repo": "x-omni-team/X-Omni",
+      "commit": "2b8237bb3789638c290eeda3e83ed81bd3652c3b",
+      "code": [
+        {
+          "path": "README.md",
+          "start": 1,
+          "end": 44,
+          "claim": "Released semantic image token model with diffusion decoder inference",
+          "url": "https://github.com/x-omni-team/X-Omni/blob/2b8237bb3789638c290eeda3e83ed81bd3652c3b/README.md#L1-L44"
+        }
+      ],
+      "caution": "Image only; semantic image tokenizer + LLM autoregression + FLUX.1-dev decoder"
+    },
+    {
+      "id": "transfusion",
+      "title": "Transfusion: Predict the Next Token and Diffuse Images with One Multi-Modal Model",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2025/hash/12678c3948153f4bc391f51e2082bd6e-Abstract-Conference.html",
+      "date": "2025",
+      "type": "ICLR_2025",
+      "evidence": "AR text loss and diffusion image patch loss jointly trained; intra-image bidirectional attention"
+    },
+    {
+      "id": "mot",
+      "title": "Mixture-of-Transformers: A Sparse and Scalable Architecture for Multi-Modal Foundation Models",
+      "url": "https://arxiv.org/abs/2411.04996",
+      "date": "2025",
+      "type": "TMLR_2025_and_code",
+      "repo": "facebookresearch/Mixture-of-Transformers",
+      "commit": "2ba51c05c9ebfdf0febb44c447a89ab24b9a36fb",
+      "code": [
+        {
+          "path": "README.md",
+          "start": 1,
+          "end": 100,
+          "claim": "Modality-aware FFN, attention, norm; modality-specific FLOP comparisons",
+          "url": "https://github.com/facebookresearch/Mixture-of-Transformers/blob/2ba51c05c9ebfdf0febb44c447a89ab24b9a36fb/README.md#L1-L100"
+        }
+      ]
+    },
+    {
+      "id": "tokenflow",
+      "title": "TokenFlow: Unified Image Tokenizer for Multimodal Understanding and Generation",
+      "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Qu_TokenFlow_Unified_Image_Tokenizer_for_Multimodal_Understanding_and_Generation_CVPR_2025_paper.html",
+      "type": "CVPR_2025",
+      "evidence": "semantic/pixel codebooks coupled via shared indices"
+    },
+    {
+      "id": "semhitok",
+      "title": "SemHiTok: A Unified Image Tokenizer via Semantic-Guided Hierarchical Codebook for Multimodal Understanding and Generation",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/49ffa271264808cf500ea528ed8ec9b3-Abstract-Conference.html",
+      "type": "ICLR_2026",
+      "evidence": "semantic-guided hierarchical codebook"
+    },
+    {
+      "id": "dual_stream",
+      "title": "A Dual Stream Visual Tokenizer for LLM Image Generation",
+      "url": "https://www.ijcai.org/proceedings/2025/167",
+      "type": "IJCAI_2025",
+      "evidence": "high-level semantic tokens and low-level pixel tokens, coarse-resolution guidance plus diffusion"
+    },
+    {
+      "id": "uni_vigu",
+      "title": "Uni-ViGU: Towards Unified Video Generation and Understanding via A Diffusion-Based Video Generator",
+      "url": "https://arxiv.org/html/2604.08121v1",
+      "type": "arxiv_preview",
+      "evidence": "Stage 1 reconstructs original prompt; video and text coupled denoising",
+      "caution": "Already covers core joint denoising premise; training/source mismatches separately recorded"
+    }
+  ],
+  "reference_doc": "docs/07_semantic_interfaces_and_literature.md",
+  "experiment_doc": "docs/08_condition_interface_experiments.md"
+}
