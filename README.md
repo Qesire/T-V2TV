@@ -14,6 +14,8 @@
 8. [新的语义传输前置实验](docs/08_condition_interface_experiments.md)：在文字扩散训练前区分编码信息损失、视频条件消费不足、视觉语义先验与真正动态反馈。
 9. [文本条件的计算图与文献分类](docs/09_text_condition_computational_graph.md)：按输入、编码、语义规划、时空路由、训练目标和联合演化整理文献，追踪偏差来源与最终视频响应；补入 GRAN-TED 和 Semantic Routing。
 
+10. [文字条件对最终视频分布与语义几何的作用](docs/10_text_condition_video_geometry.md)：从完整采样的终点响应算子，推导条件测度输运、语义约束面和动态条件可达空间；附[两帧运动解析图](assets/conditional_geometry_toy.svg)。
+
 [新增文献与固定源码清单](references/semantic_interface_sources.json)。
 
 **实验准备**：[分阶段机器可读计划](experiments/plan_operator_v0.json) · [8 对动作反事实 prompt（尚未配视频）](experiments/prompt_sets/operator_pairs_v0.json) · [CPU 算子测试](tests/test_operator_invariants.py)（运行要求：PyTorch）。
